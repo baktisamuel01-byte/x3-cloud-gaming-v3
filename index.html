@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d18">
+  <title>X3 Cloud Gaming V3</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #080d18;
+      color: #f4f7ff;
+    }
+    header {
+      padding: 22px 18px;
+      border-bottom: 1px solid #202c40;
+      background: #0d1525;
+    }
+    .logo {
+      color: #53e7ff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .tagline {
+      color: #91a4c3;
+      font-size: 13px;
+      margin-top: 7px;
+    }
+    main {
+      max-width: 650px;
+      margin: auto;
+      padding: 24px 18px;
+    }
+    .hero {
+      padding: 25px 20px;
+      border: 1px solid #24465d;
+      border-radius: 18px;
+      background: linear-gradient(145deg, #12283c, #101528);
+    }
+    .status {
+      color: #63edb0;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+    h1 {
+      font-size: 30px;
+      line-height: 1.2;
+      margin: 15px 0 10px;
+    }
+    p {
+      color: #a9b8d1;
+      line-height: 1.6;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 12px;
+      border: 0;
+      border-radius: 10px;
+      background: #35d9f5;
+      color: #06121d;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .secondary {
+      background: #1a2940;
+      color: #f4f7ff;
+      border: 1px solid #344764;
+    }
+    .card {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #26344c;
+      border-radius: 15px;
+      background: #101827;
+    }
+    .card h2 { font-size: 18px; }
+    .small {
+      font-size: 12px;
+      color: #8294b2;
+    }
+    footer {
+      padding: 25px 15px;
+      text-align: center;
+      color: #73839e;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">X3 CLOUD GAMING</div>
+    <div class="tagline">Your game. Your cloud. Your X3.</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="status">● X3 SYSTEM ONLINE</div>
+      <h1>Main game favoritmu.</h1>
+      <p>
+        Selamat datang di X3 Cloud Gaming V3.
+        Fondasi layanan cloud gaming sedang dibangun.
+      </p>
+      <button onclick="startX3()">MULAI X3</button>
+      <button class="secondary" onclick="showConnection()">
+        KONEKSI PERANGKAT
+      </button>
+      <p id="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <h2>🎮 Game Center</h2>
+      <p>Mobile Legends</p>
+      <p class="small">
+        Mesin game belum terhubung. Streaming belum aktif.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>📡 Status Koneksi</h2>
+      <p id="connection">Belum ada perangkat yang dipasangkan.</p>
+    </section>
+  </main>
+
+  <footer>
+    X3 Cloud Gaming V3 · Built step by step
+  </footer>
+
+  <script>
+    function startX3() {
+      document.getElementById("message").textContent =
+        "X3 siap dikembangkan. Mesin streaming belum tersedia.";
+    }
+
+    function showConnection() {
+      document.getElementById("connection").textContent =
+        "Website aktif. Koneksi streaming antarperangkat belum dibuat.";
+    }
+  </script>
+</body>
+    </html>
+    
