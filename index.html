@@ -2,145 +2,107 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080d18">
-  <title>X3 Cloud Gaming V3</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #080d18;
-      color: #f4f7ff;
-    }
-    header {
-      padding: 22px 18px;
-      border-bottom: 1px solid #202c40;
-      background: #0d1525;
-    }
-    .logo {
-      color: #53e7ff;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .tagline {
-      color: #91a4c3;
-      font-size: 13px;
-      margin-top: 7px;
-    }
-    main {
-      max-width: 650px;
-      margin: auto;
-      padding: 24px 18px;
-    }
-    .hero {
-      padding: 25px 20px;
-      border: 1px solid #24465d;
-      border-radius: 18px;
-      background: linear-gradient(145deg, #12283c, #101528);
-    }
-    .status {
-      color: #63edb0;
-      font-size: 12px;
-      letter-spacing: 1px;
-    }
-    h1 {
-      font-size: 30px;
-      line-height: 1.2;
-      margin: 15px 0 10px;
-    }
-    p {
-      color: #a9b8d1;
-      line-height: 1.6;
-    }
-    button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 12px;
-      border: 0;
-      border-radius: 10px;
-      background: #35d9f5;
-      color: #06121d;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .secondary {
-      background: #1a2940;
-      color: #f4f7ff;
-      border: 1px solid #344764;
-    }
-    .card {
-      margin-top: 20px;
-      padding: 20px;
-      border: 1px solid #26344c;
-      border-radius: 15px;
-      background: #101827;
-    }
-    .card h2 { font-size: 18px; }
-    .small {
-      font-size: 12px;
-      color: #8294b2;
-    }
-    footer {
-      padding: 25px 15px;
-      text-align: center;
-      color: #73839e;
-      font-size: 12px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>X3 Cloud Gaming V3</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080d18;color:#f4f7ff;font-family:Arial,sans-serif;text-align:center}
+header{padding:20px;border-bottom:1px solid #24405d}
+h1{color:#53e7ff;font-size:25px;margin:0}
+p{color:#a9bad0}
+main{padding:18px;max-width:500px;margin:auto}
+.panel{background:#101b30;border:1px solid #24405d;border-radius:16px;padding:14px;margin-bottom:14px}
+canvas{width:100%;background:#050914;border:1px solid #24516b;border-radius:12px;display:block;touch-action:none}
+button{background:#13c9e8;color:#06111c;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:bold;margin:5px;touch-action:manipulation}
+.controls{display:flex;justify-content:center;gap:12px}
+.controls button{width:90px;font-size:24px}
+.small{font-size:12px;color:#91a4c3}
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">X3 CLOUD GAMING</div>
-    <div class="tagline">Your game. Your cloud. Your X3.</div>
-  </header>
+<header>
+<h1>X3 CLOUD GAMING</h1>
+<p>V3 • NEON ARCADE</p>
+</header>
+<main>
+<div class="panel">
+<h3>🎮 NEON CATCH</h3>
+<p>Gerakkan pemain untuk menangkap bola neon!</p>
+<canvas id="game" width="360" height="420"></canvas>
+<h3>Skor: <span id="score">0</span></h3>
+<button id="start">▶ MULAI GAME</button>
+<div class="controls">
+<button id="left">⬅️</button>
+<button id="right">➡️</button>
+</div>
+<p class="small" id="status">Siap bermain</p>
+</div>
+<p class="small">X3 V3 • Game berjalan langsung di browser</p>
+</main>
+<script>
+const c=document.getElementById("game");
+const ctx=c.getContext("2d");
+const scoreEl=document.getElementById("score");
+const statusEl=document.getElementById("status");
+let player={x:160,y:370,w:40,h:16};
+let ball={x:100,y:30,r:9,speed:3};
+let score=0,running=false,dir=0,raf=0;
 
-  <main>
-    <section class="hero">
-      <div class="status">● X3 SYSTEM ONLINE</div>
-      <h1>Main game favoritmu.</h1>
-      <p>
-        Selamat datang di X3 Cloud Gaming V3.
-        Fondasi layanan cloud gaming sedang dibangun.
-      </p>
-      <button onclick="startX3()">MULAI X3</button>
-      <button class="secondary" onclick="showConnection()">
-        KONEKSI PERANGKAT
-      </button>
-      <p id="message" role="status" aria-live="polite"></p>
-    </section>
-
-    <section class="card">
-      <h2>🎮 Game Center</h2>
-      <p>Mobile Legends</p>
-      <p class="small">
-        Mesin game belum terhubung. Streaming belum aktif.
-      </p>
-    </section>
-
-    <section class="card">
-      <h2>📡 Status Koneksi</h2>
-      <p id="connection">Belum ada perangkat yang dipasangkan.</p>
-    </section>
-  </main>
-
-  <footer>
-    X3 Cloud Gaming V3 · Built step by step
-  </footer>
-
-  <script>
-    function startX3() {
-      document.getElementById("message").textContent =
-        "X3 siap dikembangkan. Mesin streaming belum tersedia.";
-    }
-
-    function showConnection() {
-      document.getElementById("connection").textContent =
-        "Website aktif. Koneksi streaming antarperangkat belum dibuat.";
-    }
-  </script>
+function draw(){
+ctx.clearRect(0,0,c.width,c.height);
+ctx.fillStyle="#101b30";
+for(let y=10;y<c.height;y+=30){
+for(let x=10;x<c.width;x+=30)ctx.fillRect(x,y,1,1);
+}
+ctx.shadowBlur=15;ctx.shadowColor="#53e7ff";
+ctx.fillStyle="#53e7ff";
+ctx.fillRect(player.x,player.y,player.w,player.h);
+ctx.shadowColor="#ff5ce1";ctx.fillStyle="#ff5ce1";
+ctx.beginPath();ctx.arc(ball.x,ball.y,ball.r,0,Math.PI*2);ctx.fill();
+ctx.shadowBlur=0;
+}
+function frame(){
+if(!running)return;
+player.x=Math.max(0,Math.min(c.width-player.w,player.x+dir*5));
+ball.y+=ball.speed;
+if(ball.y+ball.r>=player.y&&ball.x>=player.x-5&&ball.x<=player.x+player.w+5){
+score++;scoreEl.textContent=score;
+ball.y=15;ball.x=20+Math.random()*320;
+ball.speed=Math.min(7,ball.speed+0.15);
+}
+if(ball.y>c.height){
+running=false;
+statusEl.textContent="Game selesai! Skor: "+score;
+document.getElementById("start").textContent="↻ MAIN LAGI";
+draw();return;
+}
+draw();raf=requestAnimationFrame(frame);
+}
+function start(){
+cancelAnimationFrame(raf);
+score=0;scoreEl.textContent=0;
+player.x=160;ball.x=60+Math.random()*240;ball.y=25;ball.speed=3;
+running=true;statusEl.textContent="Game sedang berjalan!";
+document.getElementById("start").textContent="▶ ULANGI GAME";
+frame();
+}
+document.getElementById("start").addEventListener("click",start);
+function hold(button,direction){
+button.addEventListener("pointerdown",e=>{e.preventDefault();dir=direction});
+button.addEventListener("pointerup",()=>{if(dir===direction)dir=0});
+button.addEventListener("pointerleave",()=>{if(dir===direction)dir=0});
+button.addEventListener("pointercancel",()=>{dir=0});
+}
+hold(document.getElementById("left"),-1);
+hold(document.getElementById("right"),1);
+c.addEventListener("pointerdown",e=>{
+const rect=c.getBoundingClientRect();
+player.x=(e.clientX-rect.left)/rect.width*c.width-player.w/2;
+player.x=Math.max(0,Math.min(c.width-player.w,player.x));
+if(!running)draw();
+});
+draw();
+</script>
 </body>
-    </html>
-    
+</html>
